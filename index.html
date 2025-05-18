@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HYPE THREADS | Fashion Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Gen Z Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>HYPE THREADS</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#products">Shop</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>LEVEL UP YOUR STYLE</h2>
+                <p>Discover the latest fashion trends and express yourself with our premium collection.</p>
+                <a href="#products" class="btn">SHOP NOW</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="products">
+        <div class="container">
+            <h2 class="section-title">OUR COLLECTION</h2>
+            <div class="product-filters">
+                <button class="filter-btn active" data-filter="all">ALL</button>
+                <button class="filter-btn" data-filter="tops">TOPS</button>
+                <button class="filter-btn" data-filter="bottoms">BOTTOMS</button>
+                <button class="filter-btn" data-filter="accessories">ACCESSORIES</button>
+            </div>
+            <div id="product-list" class="product-grid">
+                <!-- Products will be loaded here via JavaScript -->
+                <div class="loading">Loading products...</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">ABOUT US</h2>
+            <p>HYPE THREADS is your destination for quality fashion that makes a statement. We curate the finest clothing and accessories to help you express your unique style.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">CONTACT US</h2>
+            <p>Have questions? Reach out to our customer service team.</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>support@hypethreads.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>YOUR CART</h3>
+            <button id="close-cart" class="close-btn">&times;</button>
+        </div>
+        <div id="cart-items" class="cart-items">
+            <!-- Cart items will be added here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>TOTAL:</span>
+                <span id="cart-total-price">Rs0</span>
+            </div>
+            <button id="checkout-btn" class="btn checkout-btn">CHECKOUT</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>CHECKOUT</h2>
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label for="name">FULL NAME</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">EMAIL</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">SHIPPING ADDRESS</label>
+                    <textarea id="address" name="address" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="payment">PAYMENT METHOD</label>
+                    <select id="payment" name="payment" required>
+                        <option value="">Select payment method</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Cash">Cash on Delivery</option>
+                    </select>
+                </div>
+                <div id="credit-card-fields" class="hidden">
+                    <div class="form-group">
+                        <label for="card-number">CARD NUMBER</label>
+                        <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiry">EXPIRY DATE</label>
+                            <input type="text" id="expiry" name="expiry" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" name="cvv" placeholder="123">
+                        </div>
+                    </div>
+                </div>
+                <div class="order-summary">
+                    <h3>ORDER SUMMARY</h3>
+                    <div id="order-items"></div>
+                    <div class="summary-total">
+                        <span>TOTAL:</span>
+                        <span id="order-total">Rs0</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn">PLACE ORDER</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-confirmation">&times;</span>
+            <div class="confirmation-message">
+                <i class="fas fa-check-circle"></i>
+                <h2>ORDER PLACED SUCCESSFULLY!</h2>
+                <p>Your order has been received and is being processed.</p>
+                <p>Order ID: <span id="order-id"></span></p>
+                <button id="continue-shopping" class="btn">CONTINUE SHOPPING</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay"></div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 HYPE THREADS. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/airtable@0.12.2/build/airtable.browser.js"></script>
+    <script src="script.js"></script>
+
+    <script type="text/javascript">
+      (function(d, t) {
+          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+          v.onload = function() {
+            window.voiceflow.chat.load({
+              verify: { projectID: '68226c2a21b25964848c02f5' },
+              url: 'https://general-runtime.voiceflow.com',
+              versionID: 'production',
+              voice: {
+                url: "https://runtime-api.voiceflow.com"
+              }
+            });
+          }
+          v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+      })(document, 'script');
+    </script>
+</body>
+</html>
